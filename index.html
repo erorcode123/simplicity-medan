@@ -1,23 +1,5 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import {
-  Phone,
-  MapPin,
-  Clock,
-  Star,
-  ShieldCheck,
-  Wrench,
-  MessageCircle,
-  ChevronRight,
-  Instagram,
-  CheckCircle2,
-  Menu,
-  X,
-  Car,
-  Gauge,
-  CircleDollarSign,
-  Sparkles,
-} from "lucide-react";
+import React from "react";
+import "./App.css";
 
 const WHATSAPP = "6281196212529";
 const MAPS_URL = "https://www.google.com/maps/place/Simplicity+-+Toko+Velg+dan+Ban+Mobil+Medan/@3.57234,98.6262003,149m/data=!3m1!1e3!4m6!3m5!1s0x30312fae121f5207:0xbbdf225300082254!8m2!3d3.5719463!4d98.625916!16s%2Fg%2F11ddxqzhv9";
@@ -29,22 +11,18 @@ function waLink(message) {
 
 const services = [
   {
-    icon: Car,
     title: "Velg Mobil",
     desc: "Pilihan velg racing, elegant, OEM look, dan upgrade tampilan harian.",
   },
   {
-    icon: Gauge,
     title: "Ban Mobil",
     desc: "Konsultasi ukuran ban sesuai mobil, kebutuhan harian, touring, atau gaya stance.",
   },
   {
-    icon: Wrench,
-    title: "Pasang, Balancing & Fitting",
+    title: "Balancing & Fitting",
     desc: "Bantu cek fitment agar velg dan ban terlihat pas, aman, dan nyaman dipakai.",
   },
   {
-    icon: CircleDollarSign,
     title: "Tukar Tambah",
     desc: "Upgrade velg lebih mudah dengan opsi tukar tambah sesuai kondisi barang.",
   },
@@ -83,18 +61,9 @@ const priceList = [
 ];
 
 const testimonials = [
-  {
-    name: "Customer Medan",
-    text: "Pelayanan cepat, admin responsif, dan pilihan velg banyak untuk mobil harian.",
-  },
-  {
-    name: "Customer Simplicity",
-    text: "Bisa konsultasi ukuran dulu sebelum pasang. Hasil fitment rapi dan mobil jadi lebih ganteng.",
-  },
-  {
-    name: "Customer Ringroad",
-    text: "Lokasi mudah dicari, cocok buat yang mau upgrade velg dan ban tanpa ribet.",
-  },
+  "Pelayanan cepat, admin responsif, dan pilihan velg banyak untuk mobil harian.",
+  "Bisa konsultasi ukuran dulu sebelum pasang. Hasil fitment rapi dan mobil jadi lebih ganteng.",
+  "Lokasi mudah dicari, cocok buat yang mau upgrade velg dan ban tanpa ribet.",
 ];
 
 const faqs = [
@@ -116,306 +85,186 @@ const faqs = [
   },
 ];
 
-function Header() {
-  const [open, setOpen] = useState(false);
-  const nav = ["Layanan", "Produk", "Harga", "Review", "Lokasi"];
-
-  return (
-    <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-neutral-950/80 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 lg:px-8">
-        <a href="#top" className="flex items-center gap-3">
-          <div className="grid h-10 w-10 place-items-center rounded-2xl bg-white text-neutral-950 shadow-lg shadow-white/10">
-            <Sparkles size={20} />
-          </div>
-          <div>
-            <p className="text-sm font-black tracking-wide text-white">SIMPLICITY</p>
-            <p className="text-xs text-neutral-400">Velg & Ban Mobil Medan</p>
-          </div>
-        </a>
-
-        <nav className="hidden items-center gap-7 text-sm font-medium text-neutral-300 md:flex">
-          {nav.map((item) => (
-            <a key={item} href={`#${item.toLowerCase()}`} className="transition hover:text-white">
-              {item}
-            </a>
-          ))}
-        </nav>
-
-        <a
-          href={waLink("Halo Simplicity, saya mau konsultasi velg/ban untuk mobil saya.")}
-          className="hidden rounded-full bg-white px-5 py-2.5 text-sm font-bold text-neutral-950 transition hover:scale-105 md:inline-flex"
-        >
-          Chat WhatsApp
-        </a>
-
-        <button onClick={() => setOpen(!open)} className="text-white md:hidden">
-          {open ? <X /> : <Menu />}
-        </button>
-      </div>
-
-      {open && (
-        <div className="border-t border-white/10 bg-neutral-950 px-4 py-4 md:hidden">
-          {nav.map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              onClick={() => setOpen(false)}
-              className="block rounded-xl px-3 py-3 text-neutral-200 hover:bg-white/10"
-            >
-              {item}
-            </a>
-          ))}
-        </div>
-      )}
-    </header>
-  );
-}
-
-function SectionTitle({ eyebrow, title, desc }) {
-  return (
-    <div className="mx-auto mb-10 max-w-3xl text-center">
-      <p className="mb-3 text-sm font-bold uppercase tracking-[0.25em] text-orange-400">{eyebrow}</p>
-      <h2 className="text-3xl font-black tracking-tight text-white md:text-5xl">{title}</h2>
-      {desc && <p className="mt-4 text-lg leading-8 text-neutral-400">{desc}</p>}
-    </div>
-  );
-}
-
 function App() {
   return (
-    <main id="top" className="min-h-screen bg-neutral-950 text-white">
-      <Header />
-
-      <section className="relative overflow-hidden px-4 pb-16 pt-32 lg:px-8 lg:pb-24 lg:pt-40">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(249,115,22,0.22),transparent_35%),radial-gradient(circle_at_top_right,rgba(255,255,255,0.12),transparent_35%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-neutral-950 to-transparent" />
-
-        <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm text-neutral-200 backdrop-blur">
-              <Star className="fill-orange-400 text-orange-400" size={16} />
-              Toko Velg & Ban Mobil di Medan
-            </div>
-
-            <h1 className="max-w-4xl text-5xl font-black leading-[0.95] tracking-tight md:text-7xl">
-              Upgrade tampilan mobil kamu dengan velg & ban yang pas.
-            </h1>
-
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-300 md:text-xl">
-              Konsultasi ukuran, pilih model, cek stok, sampai pemasangan. Langsung chat admin Simplicity Medan untuk rekomendasi velg dan ban sesuai mobil kamu.
-            </p>
-
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a
-                href={waLink("Halo Simplicity, saya mau cek rekomendasi velg dan ban. Mobil saya: ")}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-orange-500 px-7 py-4 font-black text-white shadow-2xl shadow-orange-500/25 transition hover:scale-105 hover:bg-orange-400"
-              >
-                <MessageCircle size={20} /> Konsultasi Gratis
-              </a>
-              <a
-                href={MAPS_URL}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/10 px-7 py-4 font-bold text-white backdrop-blur transition hover:bg-white/15"
-              >
-                <MapPin size={20} /> Buka Maps
-              </a>
-            </div>
-
-            <div className="mt-8 grid max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3">
-              {["Fast response WA", "Bisa tukar tambah", "Konsultasi fitment"].map((item) => (
-                <div key={item} className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-neutral-200">
-                  <CheckCircle2 size={17} className="text-orange-400" /> {item}
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.1 }} className="relative">
-            <div className="absolute -inset-6 rounded-[3rem] bg-orange-500/20 blur-3xl" />
-            <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-neutral-900 shadow-2xl">
-              <img
-                src="https://images.unsplash.com/photo-1603386329225-868f9b1ee6c9?q=80&w=1600&auto=format&fit=crop"
-                alt="Velg mobil premium"
-                className="h-[420px] w-full object-cover"
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/70 to-transparent p-6">
-                <p className="text-sm font-bold uppercase tracking-[0.2em] text-orange-300">Ready to upgrade?</p>
-                <p className="mt-2 text-2xl font-black">Kirim foto mobil → admin bantu pilih model.</p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      <section id="layanan" className="px-4 py-20 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <SectionTitle eyebrow="Layanan" title="Semua kebutuhan velg & ban dalam satu tempat" desc="Dibuat agar customer tidak bingung: pilih ukuran, model, harga, dan pemasangan bisa langsung dikonsultasikan." />
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {services.map((item) => (
-              <div key={item.title} className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 transition hover:-translate-y-1 hover:bg-white/[0.07]">
-                <item.icon className="mb-5 text-orange-400" size={34} />
-                <h3 className="text-xl font-black">{item.title}</h3>
-                <p className="mt-3 leading-7 text-neutral-400">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="produk" className="bg-white/[0.03] px-4 py-20 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <SectionTitle eyebrow="Produk" title="Pilihan populer untuk upgrade mobil" desc="Ganti foto contoh ini dengan foto stok asli dari toko agar website terlihat lebih terpercaya." />
-          <div className="grid gap-6 md:grid-cols-3">
-            {products.map((p) => (
-              <div key={p.title} className="overflow-hidden rounded-[2rem] border border-white/10 bg-neutral-900">
-                <div className="relative h-64 overflow-hidden">
-                  <img src={p.img} alt={p.title} className="h-full w-full object-cover transition duration-500 hover:scale-110" />
-                  <span className="absolute left-4 top-4 rounded-full bg-orange-500 px-4 py-2 text-xs font-black uppercase tracking-wide text-white">{p.tag}</span>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-2xl font-black">{p.title}</h3>
-                  <p className="mt-2 text-neutral-300">{p.price}</p>
-                  <a href={waLink(`Halo Simplicity, saya mau cek stok ${p.title}.`)} className="mt-5 inline-flex items-center gap-2 font-bold text-orange-400 hover:text-orange-300">
-                    Cek stok sekarang <ChevronRight size={18} />
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="harga" className="px-4 py-20 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+    <main>
+      <header className="header">
+        <a href="#top" className="brand">
+          <div className="logo">S</div>
           <div>
-            <p className="mb-3 text-sm font-bold uppercase tracking-[0.25em] text-orange-400">Price List</p>
-            <h2 className="text-4xl font-black tracking-tight md:text-5xl">Harga jelas, keputusan lebih cepat.</h2>
-            <p className="mt-5 text-lg leading-8 text-neutral-400">
-              Gunakan price list sebagai patokan awal. Untuk harga final, admin akan cek stok, merek, ukuran, dan promo yang sedang tersedia.
-            </p>
-            <a href={waLink("Halo Simplicity, boleh kirim price list velg dan ban terbaru?")} className="mt-7 inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-4 font-black text-neutral-950 transition hover:scale-105">
-              Minta Price List Terbaru
-            </a>
+            <strong>SIMPLICITY</strong>
+            <span>Velg & Ban Mobil Medan</span>
           </div>
+        </a>
+        <nav>
+          <a href="#layanan">Layanan</a>
+          <a href="#produk">Produk</a>
+          <a href="#harga">Harga</a>
+          <a href="#review">Review</a>
+          <a href="#lokasi">Lokasi</a>
+        </nav>
+        <a className="navCta" href={waLink("Halo Simplicity, saya mau konsultasi velg/ban untuk mobil saya.")}>Chat WA</a>
+      </header>
 
-          <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04]">
-            {priceList.map(([name, price], index) => (
-              <div key={name} className={`flex items-center justify-between gap-4 px-6 py-5 ${index !== priceList.length - 1 ? "border-b border-white/10" : ""}`}>
-                <span className="font-bold text-white">{name}</span>
-                <span className="text-right text-neutral-300">{price}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="review" className="bg-white/[0.03] px-4 py-20 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <SectionTitle eyebrow="Trust" title="Bikin customer yakin sebelum datang" desc="Website ini sengaja menonjolkan review, lokasi, WhatsApp, dan konsultasi agar calon pembeli cepat percaya." />
-          <div className="grid gap-6 md:grid-cols-3">
-            {testimonials.map((t) => (
-              <div key={t.name} className="rounded-[2rem] border border-white/10 bg-neutral-900 p-6">
-                <div className="mb-4 flex gap-1 text-orange-400">
-                  {[1, 2, 3, 4, 5].map((i) => <Star key={i} size={18} className="fill-orange-400" />)}
-                </div>
-                <p className="text-lg leading-8 text-neutral-200">“{t.text}”</p>
-                <p className="mt-5 font-black text-white">{t.name}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-8 text-center">
-            <a href={MAPS_URL} className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/10 px-7 py-4 font-bold text-white transition hover:bg-white/15">
-              Lihat review asli di Google Maps
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section className="px-4 py-20 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-3">
-          <div className="rounded-[2rem] border border-orange-500/30 bg-orange-500/10 p-6">
-            <Phone className="mb-4 text-orange-400" size={32} />
-            <h3 className="text-2xl font-black">Chat Admin</h3>
-            <p className="mt-3 text-neutral-300">WA: 0811-9621-2529</p>
-          </div>
-          <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-6">
-            <Clock className="mb-4 text-orange-400" size={32} />
-            <h3 className="text-2xl font-black">Jam Buka</h3>
-            <p className="mt-3 text-neutral-300">Senin–Sabtu 09.00–18.00<br />Minggu 10.00–17.00</p>
-          </div>
-          <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-6">
-            <Instagram className="mb-4 text-orange-400" size={32} />
-            <h3 className="text-2xl font-black">Instagram</h3>
-            <a href={INSTAGRAM_URL} className="mt-3 inline-block text-neutral-300 hover:text-white">@simplicitymedan</a>
-          </div>
-        </div>
-      </section>
-
-      <section id="lokasi" className="bg-white/[0.03] px-4 py-20 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div>
-            <p className="mb-3 text-sm font-bold uppercase tracking-[0.25em] text-orange-400">Lokasi</p>
-            <h2 className="text-4xl font-black tracking-tight md:text-5xl">Datang langsung ke Simplicity Medan.</h2>
-            <p className="mt-5 text-lg leading-8 text-neutral-400">
-              Jl. Ringroad / Jl. Gagak Hitam, Sunggal, Medan Sunggal, Kota Medan, Sumatera Utara.
-            </p>
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <a href={MAPS_URL} className="inline-flex items-center justify-center gap-2 rounded-full bg-orange-500 px-7 py-4 font-black text-white transition hover:scale-105 hover:bg-orange-400">
-                <MapPin size={20} /> Arahkan ke toko
-              </a>
-              <a href={waLink("Halo Simplicity, saya mau datang ke toko. Apakah stok velg/ban tersedia?")} className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/10 px-7 py-4 font-bold text-white transition hover:bg-white/15">
-                Tanya stok dulu
-              </a>
-            </div>
-          </div>
-
-          <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-neutral-900 p-2">
-            <iframe
-              title="Simplicity Medan Map"
-              src="https://www.google.com/maps?q=Simplicity%20Toko%20Velg%20dan%20Ban%20Mobil%20Medan&output=embed"
-              width="100%"
-              height="420"
-              loading="lazy"
-              className="rounded-[1.5rem] border-0"
-            />
-          </div>
-        </div>
-      </section>
-
-      <section className="px-4 py-20 lg:px-8">
-        <div className="mx-auto max-w-4xl">
-          <SectionTitle eyebrow="FAQ" title="Pertanyaan yang sering ditanyakan" />
-          <div className="space-y-4">
-            {faqs.map((faq) => (
-              <details key={faq.q} className="group rounded-2xl border border-white/10 bg-white/[0.04] p-6">
-                <summary className="cursor-pointer list-none text-lg font-black text-white">{faq.q}</summary>
-                <p className="mt-4 leading-7 text-neutral-400">{faq.a}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="px-4 pb-20 lg:px-8">
-        <div className="mx-auto max-w-5xl overflow-hidden rounded-[2.5rem] border border-orange-500/30 bg-gradient-to-br from-orange-500 to-orange-700 p-8 text-center shadow-2xl shadow-orange-500/20 md:p-12">
-          <ShieldCheck className="mx-auto mb-5" size={46} />
-          <h2 className="text-4xl font-black tracking-tight md:text-6xl">Bingung pilih velg?</h2>
-          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-orange-50">
-            Kirim foto mobil kamu ke admin. Kami bantu rekomendasikan ukuran, style, dan pilihan ban yang cocok.
+      <section id="top" className="hero">
+        <div className="heroText">
+          <p className="badge">Toko Velg & Ban Mobil di Medan</p>
+          <h1>Upgrade tampilan mobil kamu dengan velg & ban yang pas.</h1>
+          <p className="subtitle">
+            Konsultasi ukuran, pilih model, cek stok, sampai pemasangan. Langsung chat admin Simplicity Medan untuk rekomendasi velg dan ban sesuai mobil kamu.
           </p>
-          <a href={waLink("Halo Simplicity, saya mau dibantu pilih velg. Saya akan kirim foto mobil saya.")} className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 font-black text-orange-700 transition hover:scale-105">
-            <MessageCircle size={20} /> Chat Sekarang
-          </a>
+          <div className="actions">
+            <a className="primaryBtn" href={waLink("Halo Simplicity, saya mau cek rekomendasi velg dan ban. Mobil saya: ")}>Konsultasi Gratis</a>
+            <a className="secondaryBtn" href={MAPS_URL}>Buka Google Maps</a>
+          </div>
+          <div className="trustGrid">
+            <div>✓ Fast response WA</div>
+            <div>✓ Bisa tukar tambah</div>
+            <div>✓ Konsultasi fitment</div>
+          </div>
+        </div>
+        <div className="heroImage">
+          <img src="https://images.unsplash.com/photo-1603386329225-868f9b1ee6c9?q=80&w=1600&auto=format&fit=crop" alt="Velg mobil premium" />
+          <div className="imageCaption">Kirim foto mobil → admin bantu pilih model.</div>
         </div>
       </section>
 
-      <footer className="border-t border-white/10 px-4 py-10 lg:px-8">
-        <div className="mx-auto flex max-w-7xl flex-col gap-5 text-sm text-neutral-400 md:flex-row md:items-center md:justify-between">
-          <p>© 2026 Simplicity Medan. Velg & Ban Mobil Medan.</p>
-          <div className="flex gap-5">
-            <a href={waLink("Halo Simplicity, saya mau tanya velg dan ban.")} className="hover:text-white">WhatsApp</a>
-            <a href={MAPS_URL} className="hover:text-white">Google Maps</a>
-            <a href={INSTAGRAM_URL} className="hover:text-white">Instagram</a>
+      <section id="layanan" className="section">
+        <div className="sectionTitle">
+          <p>Layanan</p>
+          <h2>Semua kebutuhan velg & ban dalam satu tempat</h2>
+        </div>
+        <div className="cards four">
+          {services.map((item) => (
+            <div className="card" key={item.title}>
+              <div className="cardIcon">★</div>
+              <h3>{item.title}</h3>
+              <p>{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="produk" className="section darkSection">
+        <div className="sectionTitle">
+          <p>Produk</p>
+          <h2>Pilihan populer untuk upgrade mobil</h2>
+          <span>Ganti foto contoh ini dengan foto stok asli dari toko agar website terlihat lebih terpercaya.</span>
+        </div>
+        <div className="cards three">
+          {products.map((p) => (
+            <div className="product" key={p.title}>
+              <div className="productImage">
+                <img src={p.img} alt={p.title} />
+                <span>{p.tag}</span>
+              </div>
+              <div className="productBody">
+                <h3>{p.title}</h3>
+                <p>{p.price}</p>
+                <a href={waLink(`Halo Simplicity, saya mau cek stok ${p.title}.`)}>Cek stok sekarang →</a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="harga" className="section split">
+        <div>
+          <p className="eyebrow">Price List</p>
+          <h2>Harga jelas, keputusan lebih cepat.</h2>
+          <p className="bodyText">
+            Gunakan price list sebagai patokan awal. Untuk harga final, admin akan cek stok, merek, ukuran, dan promo yang sedang tersedia.
+          </p>
+          <a className="primaryBtn" href={waLink("Halo Simplicity, boleh kirim price list velg dan ban terbaru?")}>Minta Price List Terbaru</a>
+        </div>
+        <div className="priceBox">
+          {priceList.map(([name, price]) => (
+            <div className="priceRow" key={name}>
+              <strong>{name}</strong>
+              <span>{price}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="review" className="section darkSection">
+        <div className="sectionTitle">
+          <p>Review</p>
+          <h2>Bikin customer yakin sebelum datang</h2>
+        </div>
+        <div className="cards three">
+          {testimonials.map((text, index) => (
+            <div className="card" key={index}>
+              <div className="stars">★★★★★</div>
+              <p>“{text}”</p>
+              <strong>Customer Simplicity</strong>
+            </div>
+          ))}
+        </div>
+        <div className="center">
+          <a className="secondaryBtn" href={MAPS_URL}>Lihat review asli di Google Maps</a>
+        </div>
+      </section>
+
+      <section className="section infoGrid">
+        <div className="infoCard">
+          <h3>Chat Admin</h3>
+          <p>WA: 0811-9621-2529</p>
+        </div>
+        <div className="infoCard">
+          <h3>Jam Buka</h3>
+          <p>Senin–Sabtu 09.00–18.00<br />Minggu 10.00–17.00</p>
+        </div>
+        <div className="infoCard">
+          <h3>Instagram</h3>
+          <a href={INSTAGRAM_URL}>@simplicitymedan</a>
+        </div>
+      </section>
+
+      <section id="lokasi" className="section split darkSection">
+        <div>
+          <p className="eyebrow">Lokasi</p>
+          <h2>Datang langsung ke Simplicity Medan.</h2>
+          <p className="bodyText">Jl. Ringroad / Jl. Gagak Hitam, Sunggal, Medan Sunggal, Kota Medan, Sumatera Utara.</p>
+          <div className="actions">
+            <a className="primaryBtn" href={MAPS_URL}>Arahkan ke toko</a>
+            <a className="secondaryBtn" href={waLink("Halo Simplicity, saya mau datang ke toko. Apakah stok velg/ban tersedia?")}>Tanya stok dulu</a>
           </div>
+        </div>
+        <iframe
+          title="Simplicity Medan Map"
+          src="https://www.google.com/maps?q=Simplicity%20Toko%20Velg%20dan%20Ban%20Mobil%20Medan&output=embed"
+          width="100%"
+          height="420"
+          loading="lazy"
+        />
+      </section>
+
+      <section className="section faq">
+        <div className="sectionTitle">
+          <p>FAQ</p>
+          <h2>Pertanyaan yang sering ditanyakan</h2>
+        </div>
+        {faqs.map((faq) => (
+          <details key={faq.q}>
+            <summary>{faq.q}</summary>
+            <p>{faq.a}</p>
+          </details>
+        ))}
+      </section>
+
+      <section className="cta">
+        <h2>Bingung pilih velg?</h2>
+        <p>Kirim foto mobil kamu ke admin. Kami bantu rekomendasikan ukuran, style, dan pilihan ban yang cocok.</p>
+        <a href={waLink("Halo Simplicity, saya mau dibantu pilih velg. Saya akan kirim foto mobil saya.")}>Chat Sekarang</a>
+      </section>
+
+      <footer>
+        <p>© 2026 Simplicity Medan. Velg & Ban Mobil Medan.</p>
+        <div>
+          <a href={waLink("Halo Simplicity, saya mau tanya velg dan ban.")}>WhatsApp</a>
+          <a href={MAPS_URL}>Google Maps</a>
+          <a href={INSTAGRAM_URL}>Instagram</a>
         </div>
       </footer>
     </main>
