@@ -1,274 +1,257 @@
-import React from "react";
-import "./App.css";
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simplicity Medan | Toko Velg & Ban Mobil Medan</title>
+  <meta name="description" content="Simplicity Medan - Toko velg dan ban mobil di Medan. Konsultasi ukuran velg, ban, tukar tambah, balancing, fitting, dan pemasangan." />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: Arial, sans-serif; background: #0b0b0d; color: #fff; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
 
-const WHATSAPP = "6281196212529";
-const MAPS_URL = "https://www.google.com/maps/place/Simplicity+-+Toko+Velg+dan+Ban+Mobil+Medan/@3.57234,98.6262003,149m/data=!3m1!1e3!4m6!3m5!1s0x30312fae121f5207:0xbbdf225300082254!8m2!3d3.5719463!4d98.625916!16s%2Fg%2F11ddxqzhv9";
-const INSTAGRAM_URL = "https://www.instagram.com/simplicitymedan/";
+    .container { width: min(1120px, 92%); margin: auto; }
+    .header { position: sticky; top: 0; z-index: 10; background: rgba(11,11,13,.9); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,.08); }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; }
+    .logo { width: 42px; height: 42px; border-radius: 14px; background: #f97316; display: grid; place-items: center; font-size: 22px; }
+    .brand span { display: block; font-size: 12px; color: #aaa; font-weight: 500; }
+    .menu { display: flex; gap: 22px; color: #ddd; font-size: 14px; }
+    .menu a:hover { color: #f97316; }
+    .btn { display: inline-block; padding: 13px 22px; border-radius: 999px; font-weight: 800; transition: .2s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: #f97316; color: #fff; box-shadow: 0 12px 30px rgba(249,115,22,.25); }
+    .btn-secondary { border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.07); }
 
-function waLink(message) {
-  return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
-}
+    .hero { padding: 86px 0 70px; background: radial-gradient(circle at top left, rgba(249,115,22,.25), transparent 35%), radial-gradient(circle at top right, rgba(255,255,255,.12), transparent 35%); }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 42px; align-items: center; }
+    .badge { display: inline-block; padding: 8px 14px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.08); border-radius: 999px; color: #ffd1b0; font-size: 14px; margin-bottom: 22px; }
+    h1 { font-size: clamp(42px, 6vw, 76px); line-height: .95; letter-spacing: -2px; margin-bottom: 22px; }
+    .subtitle { font-size: 19px; color: #d4d4d4; max-width: 650px; margin-bottom: 28px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 24px; }
+    .trust { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .trust div { padding: 12px 14px; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.05); border-radius: 16px; color: #e5e5e5; font-size: 14px; }
+    .hero-card { position: relative; overflow: hidden; border-radius: 32px; border: 1px solid rgba(255,255,255,.12); box-shadow: 0 28px 80px rgba(0,0,0,.45); }
+    .hero-card img { height: 440px; width: 100%; object-fit: cover; }
+    .caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 24px; background: linear-gradient(transparent, rgba(0,0,0,.9)); font-weight: 900; font-size: 22px; }
 
-const services = [
-  {
-    title: "Velg Mobil",
-    desc: "Pilihan velg racing, elegant, OEM look, dan upgrade tampilan harian.",
-  },
-  {
-    title: "Ban Mobil",
-    desc: "Konsultasi ukuran ban sesuai mobil, kebutuhan harian, touring, atau gaya stance.",
-  },
-  {
-    title: "Balancing & Fitting",
-    desc: "Bantu cek fitment agar velg dan ban terlihat pas, aman, dan nyaman dipakai.",
-  },
-  {
-    title: "Tukar Tambah",
-    desc: "Upgrade velg lebih mudah dengan opsi tukar tambah sesuai kondisi barang.",
-  },
-];
+    .section { padding: 82px 0; }
+    .section.alt { background: rgba(255,255,255,.035); }
+    .section-title { text-align: center; max-width: 760px; margin: 0 auto 42px; }
+    .eyebrow { color: #f97316; text-transform: uppercase; letter-spacing: 3px; font-size: 13px; font-weight: 900; margin-bottom: 12px; }
+    h2 { font-size: clamp(32px, 4vw, 52px); line-height: 1.05; letter-spacing: -1px; margin-bottom: 14px; }
+    .muted { color: #b7b7b7; font-size: 17px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .card, .product, .price-box, .info-card, details { border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.055); border-radius: 26px; }
+    .card { padding: 25px; }
+    .icon { width: 44px; height: 44px; border-radius: 14px; background: rgba(249,115,22,.15); display: grid; place-items: center; color: #f97316; font-size: 22px; margin-bottom: 18px; }
+    .card h3, .product h3, .info-card h3 { font-size: 22px; margin-bottom: 10px; }
+    .card p, .product p, .info-card p { color: #c9c9c9; }
 
-const products = [
-  {
-    title: "Velg Racing R15–R17",
-    price: "Mulai Rp 3 jutaan / set",
-    tag: "Best Seller",
-    img: "https://images.unsplash.com/photo-1603386329225-868f9b1ee6c9?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    title: "Velg Premium R18–R20",
-    price: "Hubungi admin untuk stok",
-    tag: "Premium Look",
-    img: "https://images.unsplash.com/photo-1621993202323-f438eec934d2?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    title: "Ban Mobil Harian",
-    price: "Mulai Rp 600 ribuan / pcs",
-    tag: "Daily Use",
-    img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1200&auto=format&fit=crop",
-  },
-];
+    .product { overflow: hidden; background: #121216; }
+    .product-img { position: relative; height: 250px; overflow: hidden; }
+    .product-img img { width: 100%; height: 100%; object-fit: cover; transition: .5s; }
+    .product:hover img { transform: scale(1.07); }
+    .tag { position: absolute; top: 14px; left: 14px; background: #f97316; color: white; padding: 7px 12px; border-radius: 999px; font-size: 12px; font-weight: 900; }
+    .product-body { padding: 22px; }
+    .product-body a { color: #fb923c; font-weight: 900; display: inline-block; margin-top: 14px; }
 
-const priceList = [
-  ["Velg R14", "Tanyakan stok"],
-  ["Velg R15", "Mulai Rp 3 jutaan / set"],
-  ["Velg R16", "Mulai Rp 4 jutaan / set"],
-  ["Velg R17", "Mulai Rp 5 jutaan / set"],
-  ["Velg R18 ke atas", "Hubungi admin"],
-  ["Ban mobil", "Mulai Rp 600 ribuan / pcs"],
-  ["Balancing / fitting", "Hubungi admin"],
-  ["Tukar tambah velg", "Cek kondisi dulu"],
-];
+    .split { display: grid; grid-template-columns: .9fr 1.1fr; gap: 40px; align-items: start; }
+    .price-box { overflow: hidden; }
+    .price-row { display: flex; justify-content: space-between; gap: 20px; padding: 18px 22px; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .price-row:last-child { border-bottom: 0; }
+    .price-row span { color: #d4d4d4; text-align: right; }
 
-const testimonials = [
-  "Pelayanan cepat, admin responsif, dan pilihan velg banyak untuk mobil harian.",
-  "Bisa konsultasi ukuran dulu sebelum pasang. Hasil fitment rapi dan mobil jadi lebih ganteng.",
-  "Lokasi mudah dicari, cocok buat yang mau upgrade velg dan ban tanpa ribet.",
-];
+    .stars { color: #f97316; letter-spacing: 3px; margin-bottom: 14px; }
+    .center { text-align: center; margin-top: 30px; }
+    .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .info-card { padding: 26px; }
+    iframe { width: 100%; border: 0; border-radius: 26px; min-height: 420px; }
+    details { padding: 22px 24px; margin-bottom: 14px; }
+    summary { cursor: pointer; font-weight: 900; font-size: 18px; }
+    details p { color: #c9c9c9; margin-top: 12px; }
 
-const faqs = [
-  {
-    q: "Bisa konsultasi ukuran velg dulu?",
-    a: "Bisa. Kirim tipe mobil, tahun mobil, ukuran velg/ban sekarang, dan style yang diinginkan via WhatsApp.",
-  },
-  {
-    q: "Ada tukar tambah velg lama?",
-    a: "Ada opsi tukar tambah. Harga tergantung kondisi velg, ukuran, merek, dan kelengkapan.",
-  },
-  {
-    q: "Harga di website pasti sama?",
-    a: "Harga bersifat estimasi karena stok, merek, ukuran, dan promo bisa berubah. Untuk harga final, chat admin.",
-  },
-  {
-    q: "Bisa langsung datang ke toko?",
-    a: "Bisa. Toko berada di area Jl. Ringroad / Jl. Gagak Hitam, Medan Sunggal.",
-  },
-];
+    .cta { width: min(920px, 92%); margin: 40px auto 80px; text-align: center; padding: 48px 28px; border-radius: 34px; background: linear-gradient(135deg, #f97316, #c2410c); box-shadow: 0 28px 90px rgba(249,115,22,.22); }
+    .cta h2 { font-size: clamp(36px, 5vw, 62px); }
+    .cta p { max-width: 650px; margin: 0 auto 24px; color: #fff7ed; font-size: 18px; }
+    .cta a { display: inline-block; background: #fff; color: #c2410c; padding: 14px 26px; border-radius: 999px; font-weight: 900; }
 
-function App() {
-  return (
-    <main>
-      <header className="header">
-        <a href="#top" className="brand">
-          <div className="logo">S</div>
-          <div>
-            <strong>SIMPLICITY</strong>
-            <span>Velg & Ban Mobil Medan</span>
-          </div>
-        </a>
-        <nav>
-          <a href="#layanan">Layanan</a>
-          <a href="#produk">Produk</a>
-          <a href="#harga">Harga</a>
-          <a href="#review">Review</a>
-          <a href="#lokasi">Lokasi</a>
-        </nav>
-        <a className="navCta" href={waLink("Halo Simplicity, saya mau konsultasi velg/ban untuk mobil saya.")}>Chat WA</a>
-      </header>
+    footer { border-top: 1px solid rgba(255,255,255,.1); padding: 28px 0; color: #aaa; }
+    .footer-grid { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .footer-grid div { display: flex; gap: 20px; }
 
-      <section id="top" className="hero">
-        <div className="heroText">
-          <p className="badge">Toko Velg & Ban Mobil di Medan</p>
+    .float-wa { position: fixed; right: 20px; bottom: 20px; background: #25d366; color: white; padding: 14px 18px; border-radius: 999px; font-weight: 900; box-shadow: 0 16px 40px rgba(37,211,102,.35); z-index: 20; }
+
+    @media (max-width: 900px) {
+      .menu { display: none; }
+      .hero-grid, .split { grid-template-columns: 1fr; }
+      .grid-4, .grid-3, .info-grid, .trust { grid-template-columns: 1fr; }
+      .hero { padding-top: 55px; }
+      .hero-card img { height: 330px; }
+      .navCta { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <a href="#top" class="brand">
+        <div class="logo">S</div>
+        <div>SIMPLICITY <span>Velg & Ban Mobil Medan</span></div>
+      </a>
+      <nav class="menu">
+        <a href="#layanan">Layanan</a>
+        <a href="#produk">Produk</a>
+        <a href="#harga">Harga</a>
+        <a href="#review">Review</a>
+        <a href="#lokasi">Lokasi</a>
+      </nav>
+      <a class="btn btn-primary navCta" href="https://wa.me/6281196212529?text=Halo%20Simplicity%2C%20saya%20mau%20konsultasi%20velg%2Fban%20untuk%20mobil%20saya.">Chat WA</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="badge">Toko Velg & Ban Mobil di Medan</div>
           <h1>Upgrade tampilan mobil kamu dengan velg & ban yang pas.</h1>
-          <p className="subtitle">
-            Konsultasi ukuran, pilih model, cek stok, sampai pemasangan. Langsung chat admin Simplicity Medan untuk rekomendasi velg dan ban sesuai mobil kamu.
-          </p>
-          <div className="actions">
-            <a className="primaryBtn" href={waLink("Halo Simplicity, saya mau cek rekomendasi velg dan ban. Mobil saya: ")}>Konsultasi Gratis</a>
-            <a className="secondaryBtn" href={MAPS_URL}>Buka Google Maps</a>
+          <p class="subtitle">Konsultasi ukuran, pilih model, cek stok, sampai pemasangan. Langsung chat admin Simplicity Medan untuk rekomendasi velg dan ban sesuai mobil kamu.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="https://wa.me/6281196212529?text=Halo%20Simplicity%2C%20saya%20mau%20cek%20rekomendasi%20velg%20dan%20ban.%20Mobil%20saya%3A%20">Konsultasi Gratis</a>
+            <a class="btn btn-secondary" href="https://www.google.com/maps/place/Simplicity+-+Toko+Velg+dan+Ban+Mobil+Medan/@3.57234,98.6262003,149m/data=!3m1!1e3!4m6!3m5!1s0x30312fae121f5207:0xbbdf225300082254!8m2!3d3.5719463!4d98.625916!16s%2Fg%2F11ddxqzhv9">Buka Google Maps</a>
           </div>
-          <div className="trustGrid">
+          <div class="trust">
             <div>✓ Fast response WA</div>
             <div>✓ Bisa tukar tambah</div>
             <div>✓ Konsultasi fitment</div>
           </div>
         </div>
-        <div className="heroImage">
-          <img src="https://images.unsplash.com/photo-1603386329225-868f9b1ee6c9?q=80&w=1600&auto=format&fit=crop" alt="Velg mobil premium" />
-          <div className="imageCaption">Kirim foto mobil → admin bantu pilih model.</div>
+        <div class="hero-card">
+          <img src="https://images.unsplash.com/photo-1603386329225-868f9b1ee6c9?q=80&w=1600&auto=format&fit=crop" alt="Velg mobil premium">
+          <div class="caption">Kirim foto mobil → admin bantu pilih model.</div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="layanan" className="section">
-        <div className="sectionTitle">
-          <p>Layanan</p>
+    <section id="layanan" class="section">
+      <div class="container">
+        <div class="section-title">
+          <div class="eyebrow">Layanan</div>
           <h2>Semua kebutuhan velg & ban dalam satu tempat</h2>
+          <p class="muted">Dibuat agar customer tidak bingung: pilih ukuran, model, harga, dan pemasangan bisa langsung dikonsultasikan.</p>
         </div>
-        <div className="cards four">
-          {services.map((item) => (
-            <div className="card" key={item.title}>
-              <div className="cardIcon">★</div>
-              <h3>{item.title}</h3>
-              <p>{item.desc}</p>
-            </div>
-          ))}
+        <div class="grid-4">
+          <div class="card"><div class="icon">★</div><h3>Velg Mobil</h3><p>Pilihan velg racing, elegant, OEM look, dan upgrade tampilan harian.</p></div>
+          <div class="card"><div class="icon">●</div><h3>Ban Mobil</h3><p>Konsultasi ukuran ban sesuai mobil, kebutuhan harian, touring, atau gaya stance.</p></div>
+          <div class="card"><div class="icon">⚙</div><h3>Balancing & Fitting</h3><p>Bantu cek fitment agar velg dan ban terlihat pas, aman, dan nyaman dipakai.</p></div>
+          <div class="card"><div class="icon">↻</div><h3>Tukar Tambah</h3><p>Upgrade velg lebih mudah dengan opsi tukar tambah sesuai kondisi barang.</p></div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="produk" className="section darkSection">
-        <div className="sectionTitle">
-          <p>Produk</p>
+    <section id="produk" class="section alt">
+      <div class="container">
+        <div class="section-title">
+          <div class="eyebrow">Produk</div>
           <h2>Pilihan populer untuk upgrade mobil</h2>
-          <span>Ganti foto contoh ini dengan foto stok asli dari toko agar website terlihat lebih terpercaya.</span>
+          <p class="muted">Ganti foto contoh ini dengan foto stok asli dari toko agar website terlihat lebih terpercaya.</p>
         </div>
-        <div className="cards three">
-          {products.map((p) => (
-            <div className="product" key={p.title}>
-              <div className="productImage">
-                <img src={p.img} alt={p.title} />
-                <span>{p.tag}</span>
-              </div>
-              <div className="productBody">
-                <h3>{p.title}</h3>
-                <p>{p.price}</p>
-                <a href={waLink(`Halo Simplicity, saya mau cek stok ${p.title}.`)}>Cek stok sekarang →</a>
-              </div>
-            </div>
-          ))}
+        <div class="grid-3">
+          <div class="product"><div class="product-img"><img src="https://images.unsplash.com/photo-1603386329225-868f9b1ee6c9?q=80&w=1200&auto=format&fit=crop" alt="Velg Racing"><span class="tag">Best Seller</span></div><div class="product-body"><h3>Velg Racing R15–R17</h3><p>Mulai Rp 3 jutaan / set</p><a href="https://wa.me/6281196212529?text=Halo%20Simplicity%2C%20saya%20mau%20cek%20stok%20Velg%20Racing%20R15-R17.">Cek stok sekarang →</a></div></div>
+          <div class="product"><div class="product-img"><img src="https://images.unsplash.com/photo-1621993202323-f438eec934d2?q=80&w=1200&auto=format&fit=crop" alt="Velg Premium"><span class="tag">Premium Look</span></div><div class="product-body"><h3>Velg Premium R18–R20</h3><p>Hubungi admin untuk stok</p><a href="https://wa.me/6281196212529?text=Halo%20Simplicity%2C%20saya%20mau%20cek%20stok%20Velg%20Premium%20R18-R20.">Cek stok sekarang →</a></div></div>
+          <div class="product"><div class="product-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1200&auto=format&fit=crop" alt="Ban Mobil"><span class="tag">Daily Use</span></div><div class="product-body"><h3>Ban Mobil Harian</h3><p>Mulai Rp 600 ribuan / pcs</p><a href="https://wa.me/6281196212529?text=Halo%20Simplicity%2C%20saya%20mau%20cek%20stok%20ban%20mobil.">Cek stok sekarang →</a></div></div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="harga" className="section split">
+    <section id="harga" class="section">
+      <div class="container split">
         <div>
-          <p className="eyebrow">Price List</p>
+          <div class="eyebrow">Price List</div>
           <h2>Harga jelas, keputusan lebih cepat.</h2>
-          <p className="bodyText">
-            Gunakan price list sebagai patokan awal. Untuk harga final, admin akan cek stok, merek, ukuran, dan promo yang sedang tersedia.
-          </p>
-          <a className="primaryBtn" href={waLink("Halo Simplicity, boleh kirim price list velg dan ban terbaru?")}>Minta Price List Terbaru</a>
+          <p class="muted">Gunakan price list sebagai patokan awal. Untuk harga final, admin akan cek stok, merek, ukuran, dan promo yang sedang tersedia.</p><br>
+          <a class="btn btn-primary" href="https://wa.me/6281196212529?text=Halo%20Simplicity%2C%20boleh%20kirim%20price%20list%20velg%20dan%20ban%20terbaru%3F">Minta Price List Terbaru</a>
         </div>
-        <div className="priceBox">
-          {priceList.map(([name, price]) => (
-            <div className="priceRow" key={name}>
-              <strong>{name}</strong>
-              <span>{price}</span>
-            </div>
-          ))}
+        <div class="price-box">
+          <div class="price-row"><strong>Velg R14</strong><span>Tanyakan stok</span></div>
+          <div class="price-row"><strong>Velg R15</strong><span>Mulai Rp 3 jutaan / set</span></div>
+          <div class="price-row"><strong>Velg R16</strong><span>Mulai Rp 4 jutaan / set</span></div>
+          <div class="price-row"><strong>Velg R17</strong><span>Mulai Rp 5 jutaan / set</span></div>
+          <div class="price-row"><strong>Velg R18 ke atas</strong><span>Hubungi admin</span></div>
+          <div class="price-row"><strong>Ban mobil</strong><span>Mulai Rp 600 ribuan / pcs</span></div>
+          <div class="price-row"><strong>Balancing / fitting</strong><span>Hubungi admin</span></div>
+          <div class="price-row"><strong>Tukar tambah velg</strong><span>Cek kondisi dulu</span></div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="review" className="section darkSection">
-        <div className="sectionTitle">
-          <p>Review</p>
-          <h2>Bikin customer yakin sebelum datang</h2>
+    <section id="review" class="section alt">
+      <div class="container">
+        <div class="section-title"><div class="eyebrow">Review</div><h2>Bikin customer yakin sebelum datang</h2></div>
+        <div class="grid-3">
+          <div class="card"><div class="stars">★★★★★</div><p>“Pelayanan cepat, admin responsif, dan pilihan velg banyak untuk mobil harian.”</p><br><strong>Customer Simplicity</strong></div>
+          <div class="card"><div class="stars">★★★★★</div><p>“Bisa konsultasi ukuran dulu sebelum pasang. Hasil fitment rapi dan mobil jadi lebih ganteng.”</p><br><strong>Customer Simplicity</strong></div>
+          <div class="card"><div class="stars">★★★★★</div><p>“Lokasi mudah dicari, cocok buat yang mau upgrade velg dan ban tanpa ribet.”</p><br><strong>Customer Simplicity</strong></div>
         </div>
-        <div className="cards three">
-          {testimonials.map((text, index) => (
-            <div className="card" key={index}>
-              <div className="stars">★★★★★</div>
-              <p>“{text}”</p>
-              <strong>Customer Simplicity</strong>
-            </div>
-          ))}
-        </div>
-        <div className="center">
-          <a className="secondaryBtn" href={MAPS_URL}>Lihat review asli di Google Maps</a>
-        </div>
-      </section>
+        <div class="center"><a class="btn btn-secondary" href="https://www.google.com/maps/place/Simplicity+-+Toko+Velg+dan+Ban+Mobil+Medan/@3.57234,98.6262003,149m/data=!3m1!1e3!4m6!3m5!1s0x30312fae121f5207:0xbbdf225300082254!8m2!3d3.5719463!4d98.625916!16s%2Fg%2F11ddxqzhv9">Lihat review asli di Google Maps</a></div>
+      </div>
+    </section>
 
-      <section className="section infoGrid">
-        <div className="infoCard">
-          <h3>Chat Admin</h3>
-          <p>WA: 0811-9621-2529</p>
-        </div>
-        <div className="infoCard">
-          <h3>Jam Buka</h3>
-          <p>Senin–Sabtu 09.00–18.00<br />Minggu 10.00–17.00</p>
-        </div>
-        <div className="infoCard">
-          <h3>Instagram</h3>
-          <a href={INSTAGRAM_URL}>@simplicitymedan</a>
-        </div>
-      </section>
+    <section class="section">
+      <div class="container info-grid">
+        <div class="info-card"><h3>Chat Admin</h3><p>WA: 0811-9621-2529</p></div>
+        <div class="info-card"><h3>Jam Buka</h3><p>Senin–Sabtu 09.00–18.00<br>Minggu 10.00–17.00</p></div>
+        <div class="info-card"><h3>Instagram</h3><p><a href="https://www.instagram.com/simplicitymedan/">@simplicitymedan</a></p></div>
+      </div>
+    </section>
 
-      <section id="lokasi" className="section split darkSection">
+    <section id="lokasi" class="section alt">
+      <div class="container split">
         <div>
-          <p className="eyebrow">Lokasi</p>
+          <div class="eyebrow">Lokasi</div>
           <h2>Datang langsung ke Simplicity Medan.</h2>
-          <p className="bodyText">Jl. Ringroad / Jl. Gagak Hitam, Sunggal, Medan Sunggal, Kota Medan, Sumatera Utara.</p>
-          <div className="actions">
-            <a className="primaryBtn" href={MAPS_URL}>Arahkan ke toko</a>
-            <a className="secondaryBtn" href={waLink("Halo Simplicity, saya mau datang ke toko. Apakah stok velg/ban tersedia?")}>Tanya stok dulu</a>
+          <p class="muted">Jl. Ringroad / Jl. Gagak Hitam, Sunggal, Medan Sunggal, Kota Medan, Sumatera Utara.</p><br>
+          <div class="actions">
+            <a class="btn btn-primary" href="https://www.google.com/maps/place/Simplicity+-+Toko+Velg+dan+Ban+Mobil+Medan/@3.57234,98.6262003,149m/data=!3m1!1e3!4m6!3m5!1s0x30312fae121f5207:0xbbdf225300082254!8m2!3d3.5719463!4d98.625916!16s%2Fg%2F11ddxqzhv9">Arahkan ke toko</a>
+            <a class="btn btn-secondary" href="https://wa.me/6281196212529?text=Halo%20Simplicity%2C%20saya%20mau%20datang%20ke%20toko.%20Apakah%20stok%20velg%2Fban%20tersedia%3F">Tanya stok dulu</a>
           </div>
         </div>
-        <iframe
-          title="Simplicity Medan Map"
-          src="https://www.google.com/maps?q=Simplicity%20Toko%20Velg%20dan%20Ban%20Mobil%20Medan&output=embed"
-          width="100%"
-          height="420"
-          loading="lazy"
-        />
-      </section>
+        <iframe title="Simplicity Medan Map" src="https://www.google.com/maps?q=Simplicity%20Toko%20Velg%20dan%20Ban%20Mobil%20Medan&output=embed" loading="lazy"></iframe>
+      </div>
+    </section>
 
-      <section className="section faq">
-        <div className="sectionTitle">
-          <p>FAQ</p>
-          <h2>Pertanyaan yang sering ditanyakan</h2>
-        </div>
-        {faqs.map((faq) => (
-          <details key={faq.q}>
-            <summary>{faq.q}</summary>
-            <p>{faq.a}</p>
-          </details>
-        ))}
-      </section>
+    <section class="section">
+      <div class="container">
+        <div class="section-title"><div class="eyebrow">FAQ</div><h2>Pertanyaan yang sering ditanyakan</h2></div>
+        <details><summary>Bisa konsultasi ukuran velg dulu?</summary><p>Bisa. Kirim tipe mobil, tahun mobil, ukuran velg/ban sekarang, dan style yang diinginkan via WhatsApp.</p></details>
+        <details><summary>Ada tukar tambah velg lama?</summary><p>Ada opsi tukar tambah. Harga tergantung kondisi velg, ukuran, merek, dan kelengkapan.</p></details>
+        <details><summary>Harga di website pasti sama?</summary><p>Harga bersifat estimasi karena stok, merek, ukuran, dan promo bisa berubah. Untuk harga final, chat admin.</p></details>
+        <details><summary>Bisa langsung datang ke toko?</summary><p>Bisa. Toko berada di area Jl. Ringroad / Jl. Gagak Hitam, Medan Sunggal.</p></details>
+      </div>
+    </section>
 
-      <section className="cta">
-        <h2>Bingung pilih velg?</h2>
-        <p>Kirim foto mobil kamu ke admin. Kami bantu rekomendasikan ukuran, style, dan pilihan ban yang cocok.</p>
-        <a href={waLink("Halo Simplicity, saya mau dibantu pilih velg. Saya akan kirim foto mobil saya.")}>Chat Sekarang</a>
-      </section>
+    <section class="cta">
+      <h2>Bingung pilih velg?</h2>
+      <p>Kirim foto mobil kamu ke admin. Kami bantu rekomendasikan ukuran, style, dan pilihan ban yang cocok.</p>
+      <a href="https://wa.me/6281196212529?text=Halo%20Simplicity%2C%20saya%20mau%20dibantu%20pilih%20velg.%20Saya%20akan%20kirim%20foto%20mobil%20saya.">Chat Sekarang</a>
+    </section>
+  </main>
 
-      <footer>
-        <p>© 2026 Simplicity Medan. Velg & Ban Mobil Medan.</p>
-        <div>
-          <a href={waLink("Halo Simplicity, saya mau tanya velg dan ban.")}>WhatsApp</a>
-          <a href={MAPS_URL}>Google Maps</a>
-          <a href={INSTAGRAM_URL}>Instagram</a>
-        </div>
-      </footer>
-    </main>
-  );
-}
+  <footer>
+    <div class="container footer-grid">
+      <p>© 2026 Simplicity Medan. Velg & Ban Mobil Medan.</p>
+      <div>
+        <a href="https://wa.me/6281196212529">WhatsApp</a>
+        <a href="https://www.google.com/maps/place/Simplicity+-+Toko+Velg+dan+Ban+Mobil+Medan/@3.57234,98.6262003,149m/data=!3m1!1e3!4m6!3m5!1s0x30312fae121f5207:0xbbdf225300082254!8m2!3d3.5719463!4d98.625916!16s%2Fg%2F11ddxqzhv9">Google Maps</a>
+        <a href="https://www.instagram.com/simplicitymedan/">Instagram</a>
+      </div>
+    </div>
+  </footer>
 
-export default App;
+  <a class="float-wa" href="https://wa.me/6281196212529?text=Halo%20Simplicity%2C%20saya%20mau%20tanya%20velg%20dan%20ban.">Chat WA</a>
+</body>
+</html>
